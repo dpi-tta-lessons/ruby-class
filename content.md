@@ -36,30 +36,31 @@ Real-world analogy: a `Car` class defines what every car can do, but each car (o
 
 ## 2. Defining a Simple Class
 
+We can define our own class using the `class` keyword, the name of the class (using PascalCase), and the `end` keyword. Here we are defining a `Dog` class.
+
 ```ruby
 class Dog
 end
 ```
-{: .repl }
 
 ## 3. Creating Objects (Instances)
 
-We call `new` on the `Dog` class to create an instance of `Dog`.
+Now that we have our `Dog` class, we will creat an *instance* of the `Dog` class (also called an object). We call `new` on the `Dog` class to create an instance of `Dog` (in this case `my_dog`).
 
 ```ruby
 class Dog
 end
 
-fido = Dog.new
-pp fido
+my_dog = Dog.new
+pp my_dog
 ```
 {: .repl }
 
 ## 4. Adding Instance Variables and Methods
 
-We use `@` to define an *instance variable* on the `Dog` class. You can also call these attributes.
+Our `Dog` class is a bit dull. Let's make sure our dogs have names. We'll use `@` to define an *instance variable* on the `Dog` class. You can also call these attributes.
 
-There is a special method called `initialize` that gets called when creating new object. This is a common spot to set initial values for attributes.
+There is a special method called `initialize` that gets called when creating new object. This is a common spot to set initial values for attributes. This is where we'll set the name of our dog.
 
 ```ruby
 class Dog
@@ -68,19 +69,18 @@ class Dog
   end
 
   def bark
-    puts "#{@name} says woof!"
+    "#{@name} says woof!"
   end
 end
 
 dog = Dog.new("Buddy")
-dog.bark
+pp dog.bark
 ```
 {: .repl }
 
-<!-- TODO: reader, writer, (getter/setter) -->
 ## 5. Using `attr_accessor`
 
-We can also defined attributes using `attr_accessor`.
+Now we want to be able to set or get the value of `name` outside the `Dog` class. We can make our attributes accessible outside the class using `attr_accessor`.
 
 ```ruby
 class Dog
@@ -100,22 +100,73 @@ puts dog.name
 ```
 {: .repl }
 
-<!-- TODO: quiz -->
+<aside class="tip">
+  Try changing the dog's name to something else.
+</aside>
 
-<!-- TODO: move to project
-Challenge: Create a Car class that stores a model and year, and prints a line like:
+## 6. Using `attr_reader` and `attr_writer`
 
-"My car is a 2020 Honda Civic."
+The class should control how it's data is accessed. There are some attributes we don't want to read AND write. We can restrict access to these attributes by using `attr_reader` and `attr_writer`. `attr_reader` limits access to *reading* the attribute. `attr_writer` limits access to *writing* the attribute value.
 
-🧠 Key Takeaways
+Let's apply this to our `Dog` class. Perhaps we don't want to allow users to change a dog's name, but we can change a dog's age.
 
-class defines a blueprint.
+```ruby
+class Dog
 
-@variable stores object state.
+  attr_reader :name
+  attr_writer :favorite_food
 
-attr_accessor gives easy getter/setter access.
+  def initialize(name)
+    @name = name
+    @age = 0
+  end
 
-initialize runs automatically when you call .new. 
--->
+end
 
-## References
+dog = Dog.new("Buddy")
+puts dog.name
+
+dog.age = 3
+```
+{: .repl }
+
+<aside class="tip">
+  Try changing the dog's name in the above code snippet and see what happens.
+</aside>
+
+<!-- TODO: go under the hood to see how this is creating getter/setter methods -->
+
+## Quiz
+
+- What does a Ruby class represent?
+- A single, specific instance of data.
+  - Not quite — that describes an *object*, not the class itself.
+- A built-in Ruby method.
+  - Nope! While classes contain methods, a class itself is not a method.
+- A blueprint or template for creating objects.
+  - Correct! A class defines the structure and behavior that its objects will share.
+{: .choose_best #ruby_class_meaning title="What is a Ruby Class?" answer="3"}
+
+- What does calling `Dog.new` do?
+- It creates a new instance (object) of the `Dog` class.
+  - Correct! The `.new` method calls `initialize` and returns a new `Dog` object.
+- It defines a new method inside the class.
+  - Not quite. `.new` creates objects, not methods.
+- It prints the details of the class.
+  - Nope! `.new` creates an object, but does not print anything by itself.
+{: .choose_best #dog_new title="Creating Objects with .new" answer="1"}
+
+## Wrap-Up
+
+- `class` defines a blueprint.
+- Use `@` for instance variables to store object state.
+- `attr_accessor` gives easy getter/setter access.
+- `initialize` method runs when you call `.new`.
+
+## Project: Class
+
+In this project, you will write Ruby programs that leverage Ruby Classes. This project includes automated tests, so click this link to get started <https://github.com/dpi-tta-projects/ruby-class/fork>, fork the repository and create a codespace.
+
+<aside class="warning">
+  In order to get credit for completing this project you'll need to open the assignment link from canvas to generate an access token.
+</aside>
