@@ -148,7 +148,7 @@ dog.age = 3
 {: .choose_best #ruby_class_meaning title="What is a Ruby Class?" answer="3"}
 
 - What does calling `Dog.new` do?
-- It creates a new instance (object) of the `Dog` class.
+- It creates a new instance (object) of the Dog class.
   - Correct! The `.new` method calls `initialize` and returns a new `Dog` object.
 - It defines a new method inside the class.
   - Not quite. `.new` creates objects, not methods.
