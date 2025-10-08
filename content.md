@@ -170,3 +170,7 @@ In this project, you will write Ruby programs that leverage Ruby Classes. This p
 <aside class="warning">
   In order to get credit for completing this project you'll need to open the assignment link from canvas to generate an access token.
 </aside>
+
+## References
+
+- [Ruby Docs: Class](https://docs.ruby-lang.org/en/master/Class.html)
